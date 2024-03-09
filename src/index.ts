@@ -21,7 +21,7 @@ app.use(async (ctx: Koa.Context, next: () => Promise<any>) => {
 });
 
 // routes
-router.get('/', async (ctx: Koa.Context) => {
+router.get('hello', '/', async (ctx: Koa.Context) => {
 	ctx.body = { message: 'Hello world' };
 });
 
