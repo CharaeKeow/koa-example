@@ -1,7 +1,9 @@
 import Koa from 'koa';
+import Router from '@koa/router';
 
 const PORT = 8000;
 const app = new Koa();
+const router = new Router();
 
 // logger
 app.use(async (ctx: Koa.Context, next: () => Promise<any>) => {
@@ -18,9 +20,11 @@ app.use(async (ctx: Koa.Context, next: () => Promise<any>) => {
 	ctx.set('X-Response-Time', `${responseTime}ms`);
 });
 
-// response
-app.use(async (ctx: Koa.Context) => {
-	ctx.body = 'Hello world';
+// routes
+router.get('/', async (ctx: Koa.Context) => {
+	ctx.body = { message: 'Hello world' };
 });
+
+app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(PORT);
